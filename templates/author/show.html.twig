@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Auteur{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Détails de l’auteur</h1>
+
+    <p><strong>Nom :</strong> {{ author.username|upper }}</p>
+    <p><strong>Email :</strong> {{ author.email }}</p>
+    <p><strong>Nombre de livres :</strong> {{ author.nb_books }}</p>
+
+    <img src="{{ asset(author.picture) }}" alt="{{ author.username }}" width="150">
+
+    <p>
+        <a href="{{ path('app_author_list') }}">← Retour à la liste des auteurs</a>
+    </p>
+</div>
+{% endblock %}

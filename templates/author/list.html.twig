@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Liste des auteurs</h1>
+
+    {% if authors is defined and authors is not empty %}
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Nombre de livres</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>
+                            <img src="{{ asset(author.picture) }}" alt="{{ author.username }}" width="100">
+                        </td>
+                        <td>{{ author.username|upper }}</td>
+                        <td>{{ author.email }}</td>
+                        <td>
+                            {{ author.nb_books }}
+                            {% if author.nb_books > 150 %}
+                                Auteur prolifique
+                            {% endif %}
+                        </td>
+                        <td>
+    <a href="{{ path('app_author_details', {'id': author.id}) }}">Détails</a>
+</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun auteur trouvé.</p>
+    {% endif %}
+</div>
+{% endblock %}

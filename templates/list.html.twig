@@ -1,0 +1,24 @@
+{# templates/author/list.html.twig #}
+
+<h1>Liste des auteurs</h1>
+
+{# 6. Afficher le nombre d'auteurs #}
+<p>Nombre d'auteurs : {{ authors|length }}</p>
+
+{# Vérifie si le tableau est défini et non vide #}
+{% if authors is defined and authors|length > 0 %}
+    <ul>
+        {% set totalBooks = 0 %} {# Variable pour calculer le total de livres #}
+        {% for author in authors %}
+            <li>
+                {# 5. Noms en majuscule #}
+                {{ author.username | upper }} ({{ author.email }}) - Nombre de livres : {{ author.nbBooks }}
+                
+             </li>
+            
+            {# Calcul du total de livres #}
+            {% set totalBooks = totalBooks + author.nbBooks %}
+        {% endfor %}
+    </ul>
+
+ 
