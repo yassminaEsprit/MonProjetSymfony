@@ -5,17 +5,38 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Author;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 final class AuthorController extends AbstractController
 {
     #[Route('/author', name: 'app_author')]
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
+        //a repeter 
+        //get repority aaibra bvh  inaaytou lil author imteana 
+        $authors = $em->getRepository(Author::class)->findAll();
         return $this->render('author/index.html.twig', [
-            'controller_name' => 'AuthorController',
-        ]);
+            'authors'=>$authors]);
+        
+
+    }
+    #[Route('/author/add-statique ', name: 'app_author_add_statique')]
+    public function addStatic(EntityManagerInterface $em): Response
+    {
+       $a=new Author();
+       $a->setUsername('yassmina');
+       $a->setEmail('yassmina.com');
+       $em->persist($a);//les donner bch nabaathhoum fil base de donnee 
+    $em->flush();//lancer dans la base de donnee 
+
+        return $this->redirectToRoute('app_author');
     }
 
+
+/*
     #[Route('/author/show/{name}', name: 'app_author_show')] 
     public function showAuthor(string $name): Response
     {
@@ -102,5 +123,42 @@ final class AuthorController extends AbstractController
         return $this->render('author/showAuthor.html.twig', [
             'author' => $author,
         ]);
+
+        }
+        */
+
+         #[Route('/author/new ', name: 'app_author_new')]
+         public function new(EntityManagerInterface $em,Request $Request ): Response
+         {
+            $a=new Author();
+            $form=$this->createForm(AuthorType::class,$a);
+            $form->handleRequest($Request);
+            if($form->isSubmitted() && $form->isValid()){
+                $em->persist($a);//les donner bch nabaathhoum fil base de donnee 
+                $em->flush();//lancer dans la base de donnee 
+                return $this->redirectToRoute('app_author');
+            }
+             return $this->render('author/new.html.twig',[
+                 'form'=>$form->createView()
+             ]);
+         }
+            #[Route('/author/{id}/edit', name: 'app_author_edit')]
+    public function edit( Request $request, EntityManagerInterface $em,int $id ):Response 
+    {
+        $author = $em->find(Author::class,$id);//haja il zeyda ili fil edit 
+        $form=$this->createForm(AuthorType::class,$author);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($author);
+            $em->flush();
+
+            return $this->redirectToRoute('app_author');
+
     }
-}
+        return $this->render('author/edit.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+ 
+
+} 

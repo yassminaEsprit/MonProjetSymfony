@@ -1,21 +1,35 @@
-{% extends 'base.html.twig' %}
+<h1>liste authors</h1>
+//table
+<table border="1">
+    <thead>
+        <tr>
+            
+            <th>username</th>
+            <th>email</th>
+            <th>actions</th>
+            
+        </tr>
+    </thead>
+<tbody>
 
-{% block title %}Page Index Auteur{% endblock %}
+    //author hya copie o hatyneha fi authors 
+        {% for author in authors %}
+            <tr>
+                <td>{{  author.username}}</td>
+                <td>{{author.email }}</td>
+                
+                <td>
+                    //edit <a href="{{ path('app_author_edit', {'id': author.id}) }}">Edit</a>
+                    //delete <a href="{{ path('app_author_delete', {'id': author.id}) }}">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">no authors found</td>
+            </tr>
+                 {% endfor %}
+</tbody>
+</table>
 
-{% block body %}
-<div class="example-wrapper">
-    <h1>Bienvenue dans {{ controller_name }} ✅</h1>
 
-    <p>Vous êtes sur la page <strong>Index</strong> des auteurs.</p>
 
-    <ul>
-        <li>Contrôleur : <code>src/Controller/AuthorController.php</code></li>
-        <li>Template : <code>templates/author/index.html.twig</code></li>
-    </ul>
-
-    <p>
-        👉 Testez aussi la page show :  
-        <a href="{{ path('app_author_show', {'name': 'Fabien'}) }}">Voir l’auteur Fabien</a>
-    </p>
-</div>
-{% endblock %}
