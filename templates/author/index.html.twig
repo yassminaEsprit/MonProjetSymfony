@@ -19,8 +19,8 @@
                 <td>{{author.email }}</td>
                 
                 <td>
-                    //edit <a href="{{ path('app_author_edit', {'id': author.id}) }}">Edit</a>
-                    //delete <a href="{{ path('app_author_delete', {'id': author.id}) }}">Delete</a>
+                  <a href="{{ path('app_author_edit', {'id': author.id}) }}">Edit</a>
+                     <a href="{{ path('app_author_delete', {'id': author.id}) }}">Delete</a>
                 </td>
             </tr>
             {% else %}

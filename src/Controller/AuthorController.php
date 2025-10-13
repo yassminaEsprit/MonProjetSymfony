@@ -142,7 +142,7 @@ final class AuthorController extends AbstractController
                  'form'=>$form->createView()
              ]);
          }
-            #[Route('/author/{id}/edit', name: 'app_author_edit')]
+    #[Route('/author/{id}/edit', name: 'app_author_edit')]
     public function edit( Request $request, EntityManagerInterface $em,int $id ):Response 
     {
         $author = $em->find(Author::class,$id);//haja il zeyda ili fil edit 
@@ -159,6 +159,15 @@ final class AuthorController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
- 
+    #[Route('/author/{id}/delete', name: 'app_author_delete')]
+     public function delete(EntityManagerInterface $em,int $id):Response 
+    {
+        $a  = $em->find(Author::class,$id);
+        if($a){
+            $em->remove($a);
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_author');
+    }
 
 } 

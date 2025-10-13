@@ -1,0 +1,28 @@
+<h2>Book liste</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>Publication date</th>
+            <th>Pulicited</th>
+            <th>category</th>
+            <th>Author</th>
+         </tr>
+          <thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{book.ref}}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ book.pulicited ? 'Yes' : 'No' }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.author ? book.author.username : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no books found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
