@@ -18,11 +18,19 @@
                 <td>{{ book.pulicited ? 'Yes' : 'No' }}</td>
                 <td>{{ book.category }}</td>
                 <td>{{ book.author ? book.author.username : '' }}</td>
+                <td>
+                        <a href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a>
+                        <a href="{{ path('app_book_delete', {'id': book.id}) }}">Delete</a>
+                        <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
             </tr>
         {% else %}
             <tr>
                 <td colspan="5">no books found</td>
             </tr>
+
         {% endfor %}
     </tbody>
 </table>
+ 
+<p> Number of published books: {{ countPublished }}</p>
+<p> Number of unpublished books: {{ countUnPublished }}</p>
