@@ -1,36 +1,24 @@
-<h2>Book liste</h2>
-<table border="1">
-    <thead>
-        <tr>
-            <th>title</th>
-            <th>Publication date</th>
-            <th>Pulicited</th>
-            <th>category</th>
-            <th>Author</th>
-         </tr>
-          <thead>
-    <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{book.ref}}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ book.pulicited ? 'Yes' : 'No' }}</td>
-                <td>{{ book.category }}</td>
-                <td>{{ book.author ? book.author.username : '' }}</td>
-                <td>
-                        <a href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a>
-                        <a href="{{ path('app_book_delete', {'id': book.id}) }}">Delete</a>
-                        <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no books found</td>
-            </tr>
-
-        {% endfor %}
-    </tbody>
-</table>
- 
-<p> Number of published books: {{ countPublished }}</p>
-<p> Number of unpublished books: {{ countUnPublished }}</p>
+<h2>Book list</h2> 
+<table border="1"> 
+<thead> 
+<tr>
+ <th>Ref</th>
+ <th>Title</th> 
+<th>Publication date</th>
+ <th>Published</th> 
+ <th>Category</th> 
+ <th>Author</th> 
+ <th>Actions</th> 
+ </tr> 
+ </thead>
+  <tbody>
+   {% for book in books %} <
+   tr> <td>{{ book.ref }}</td> 
+   <td>{{ book.title }}</td> 
+   <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td> 
+   <td>{{ book.isPublished() ? 'Yes' : 'No' }}</td>
+    <td>{{ book.category }}</td>
+    <td>{{ book.author ? book.author.username : '' }}</td> 
+    <td> <a href="{{ path('app_book_edit', {'id': book.id}) }}">Edit</a> 
+    <a href="{{ path('app_book_delete', {'id': book.id}) }}">Delete</a> 
+    <a href="{{ path('app_book_show', {'id': book.id}) }}">Show</a> </td> </tr> {% else %} <tr> <td colspan="7">No books found</td> </tr> {% endfor %} </tbody> </table> <p>Number of published books: {{ countPublished }}</p> <p>Number of unpublished books: {{ countUnPublished }}</p>

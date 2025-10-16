@@ -1,7 +1,4 @@
-<h2>add author</h2>
-
 {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    <button class="submit">Create Author</button>
+{{ form_widget(form) }}
+<button type="submit">Enregistrer</button>
 {{ form_end(form) }}

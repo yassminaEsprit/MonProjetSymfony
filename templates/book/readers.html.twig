@@ -1,0 +1,11 @@
+<h2>Readers of "{{ book.title }}"</h2>
+
+<ul>
+    {% for reader in readers %}
+        <li>Reader ID: {{ reader.id }}</li>
+    {% else %}
+        <li>No readers found.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('app_book_index') }}">Back to book list</a>

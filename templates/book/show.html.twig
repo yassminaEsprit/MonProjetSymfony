@@ -1,28 +1,12 @@
-<h2>book details</h2>
+<h2>Book Details</h2>
+
 <table border="1">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ book.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ book.title }}</td>
-        </tr>
-        <tr>
-            <th>PublicationDate</th>
-            <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>Pulicited</th>
-            <td>{{ book.pulicited ? 'Yes' : 'No' }}</td>
-        </tr>
-        <tr>
-            <th>Category</th>
-            <td>{{ book.category }}</td>
-        </tr>
-        <tr>
-            <th>Author</th>
-            <td>{{ book.author ? book.author.username : '' }}</td>
-        </tr>
-    </tbody> 
+    <tr><th>Ref</th><td>{{ book.ref }}</td></tr>
+    <tr><th>Title</th><td>{{ book.title }}</td></tr>
+    <tr><th>Publication Date</th><td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td></tr>
+    <tr><th>Published</th><td>{{ book.isPublished() ? 'Yes' : 'No' }}</td></tr>
+    <tr><th>Category</th><td>{{ book.category }}</td></tr>
+    <tr><th>Author</th><td>{{ book.author ? book.author.username : '' }}</td></tr>
+</table>
+
+<a href="{{ path('app_book_index') }}">Back to list</a>
